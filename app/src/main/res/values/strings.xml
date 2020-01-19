@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Kiqueue</string>
     <string name="action_settings">Settings</string>
+    <string name="dialog_title_add_feed_url">Add</string>
+    <string name="dialog_input_placeholder_add_feed_url">https://example.com/feed.xml</string>
 </resources>
