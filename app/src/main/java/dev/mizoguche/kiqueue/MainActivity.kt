@@ -6,7 +6,9 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import dev.mizoguche.kiqueue.data.XmlClient
+import dev.mizoguche.kiqueue.data.PodcastRepository
+import dev.mizoguche.kiqueue.data.PodcastXmlPullParser
+import dev.mizoguche.kiqueue.domain.PodcastFeedUrl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -28,9 +30,9 @@ class MainActivity : AppCompatActivity() {
                 .setPositiveButton("Add") { _, _ ->
                     val url = feedUrlInput.findViewById<EditText>(R.id.feed_url).text
                     Snackbar.make(view, "Added feed: $url", Snackbar.LENGTH_LONG).show()
-                    val client = XmlClient()
+                    val repository = PodcastRepository(PodcastXmlPullParser())
                     GlobalScope.launch {
-                        val response = client.Get(url.toString())
+                        val response = repository.find(PodcastFeedUrl(url.toString()))
                         Log.d(this.javaClass.canonicalName, "response: \n$response")
                     }
                 }
