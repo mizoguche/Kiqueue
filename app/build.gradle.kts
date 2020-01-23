@@ -1,34 +1,40 @@
 val kotlin_version: String by extra
 val ktor_version: String by extra
+val lifecycle_version: String by extra
+val room_version: String by extra
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("kotlin-kapt")
 }
 
 android {
     compileSdkVersion(29)
-    buildToolsVersion = "29.0.2"
+    buildToolsVersion =("29.0.2")
     defaultConfig {
-        applicationId = "dev.mizoguche.kiqueue"
+        applicationId =("dev.mizoguche.kiqueue")
         minSdkVersion(29)
         targetSdkVersion(29)
         versionCode = 1
-        versionName = "0.1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        versionName =("0.1.0")
+        testInstrumentationRunner =("androidx.test.runner.AndroidJUnitRunner")
     }
     buildTypes {
         val release by getting {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+               ("proguard-rules.pro")
             )
         }
     }
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
+    }
+    dataBinding {
+        isEnabled = true
     }
 }
 
@@ -45,4 +51,21 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
 
     implementation("io.ktor:ktor-client-android:$ktor_version")
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version")
+    testImplementation("androidx.arch.core:core-testing:$lifecycle_version")
+    
+    // Room
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-rxjava2:$room_version")
+    implementation("androidx.room:room-guava:$room_version")
+    testImplementation("androidx.room:room-testing:$room_version")
 }
