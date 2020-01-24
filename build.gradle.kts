@@ -1,3 +1,4 @@
+import java.net.URI
 
 buildscript {
     val kotlin_version: String by extra
@@ -11,7 +12,7 @@ buildscript {
         maven("https://dl.bintray.com/kotlin/kotlin-dev")
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.0")
+        classpath("com.android.tools.build:gradle:3.5.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlin_version")
     }

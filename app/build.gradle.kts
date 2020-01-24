@@ -2,6 +2,7 @@ val kotlin_version: String by extra
 val ktor_version: String by extra
 val lifecycle_version: String by extra
 val room_version: String by extra
+val koin_version: String by extra
 
 plugins {
     id("com.android.application")
@@ -10,23 +11,33 @@ plugins {
     id("kotlin-kapt")
 }
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+repositories {
+    jcenter()
+}
+
 android {
     compileSdkVersion(29)
-    buildToolsVersion =("29.0.2")
+    buildToolsVersion = ("29.0.2")
     defaultConfig {
-        applicationId =("dev.mizoguche.kiqueue")
+        applicationId = ("dev.mizoguche.kiqueue")
         minSdkVersion(29)
         targetSdkVersion(29)
         versionCode = 1
-        versionName =("0.1.0")
-        testInstrumentationRunner =("androidx.test.runner.AndroidJUnitRunner")
+        versionName = ("0.1.0")
+        testInstrumentationRunner = ("androidx.test.runner.AndroidJUnitRunner")
     }
     buildTypes {
         val release by getting {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-               ("proguard-rules.pro")
+                ("proguard-rules.pro")
             )
         }
     }
@@ -60,7 +71,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version")
     testImplementation("androidx.arch.core:core-testing:$lifecycle_version")
-    
+
     // Room
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
@@ -68,4 +79,17 @@ dependencies {
     implementation("androidx.room:room-rxjava2:$room_version")
     implementation("androidx.room:room-guava:$room_version")
     testImplementation("androidx.room:room-testing:$room_version")
+
+    // Koin
+    implementation("org.koin:koin-core:$koin_version")
+    implementation("org.koin:koin-core-ext:$koin_version")
+    testImplementation("org.koin:koin-test:$koin_version")
+    implementation("org.koin:koin-android:$koin_version")
+    implementation("org.koin:koin-android-scope:$koin_version")
+    implementation("org.koin:koin-android-viewmodel:$koin_version")
+    implementation("org.koin:koin-android-ext:$koin_version")
+    implementation("org.koin:koin-androidx-scope:$koin_version")
+    implementation("org.koin:koin-androidx-viewmodel:$koin_version")
+//    implementation("org.koin:koin-androidx-fragment:$koin_version")
+    implementation("org.koin:koin-androidx-ext:$koin_version")
 }
