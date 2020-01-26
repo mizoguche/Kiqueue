@@ -7,6 +7,7 @@ import dev.mizoguche.kiqueue.data.PodcastXmlPullParser
 import dev.mizoguche.kiqueue.data.XmlClient
 import dev.mizoguche.kiqueue.data.room.AppDatabase
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val kiqueueModule = module {
@@ -22,4 +23,5 @@ val kiqueueModule = module {
     single { PodcastXmlPullParser() as PodcastXmlParser }
     single { XmlClient() }
     single { PodcastRepository(get(), get(), get()) }
+    viewModel { PodcastListViewModel(get()) }
 }

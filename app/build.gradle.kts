@@ -11,16 +11,6 @@ plugins {
     id("kotlin-kapt")
 }
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-}
-
-repositories {
-    jcenter()
-}
-
 android {
     compileSdkVersion(29)
     buildToolsVersion = ("29.0.2")
@@ -37,7 +27,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                ("proguard-rules.pro")
+                "proguard-rules.pro"
             )
         }
     }
@@ -46,6 +36,9 @@ android {
     }
     dataBinding {
         isEnabled = true
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -66,11 +59,11 @@ dependencies {
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version")
-    testImplementation("androidx.arch.core:core-testing:$lifecycle_version")
+//    testImplementation("androidx.arch.core:core-testing:$lifecycle_version")
 
     // Room
     implementation("androidx.room:room-runtime:$room_version")
