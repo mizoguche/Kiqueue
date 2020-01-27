@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{podcast.title.value}"
+            android:text="@{podcast.title}"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             />
@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{podcast.description.value}"
+            android:text="@{podcast.description}"
             />
     </LinearLayout>
 </layout>

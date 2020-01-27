@@ -1,9 +1,9 @@
 package dev.mizoguche.kiqueue.domain
 
-data class PodcastTitle(val value: String)
-data class PodcastDescription(val value: String)
-data class PodcastFeedUrl(val value: String)
-data class PodcastImageUrl(val value: String)
+inline class PodcastTitle(val value: String)
+inline class PodcastDescription(val value: String)
+inline class PodcastFeedUrl(val value: String)
+inline class PodcastImageUrl(val value: String)
 
 data class Podcasts(private val value: List<Podcast>) : List<Podcast> by value
 
