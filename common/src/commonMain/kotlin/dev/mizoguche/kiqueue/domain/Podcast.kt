@@ -5,7 +5,7 @@ data class PodcastDescription(val value: String)
 data class PodcastFeedUrl(val value: String)
 data class PodcastImageUrl(val value: String)
 
-data class Podcasts(private val value: List<Podcast>) : Collection<Podcast> by value
+data class Podcasts(private val value: List<Podcast>) : List<Podcast> by value
 
 data class Podcast(
     val title: PodcastTitle,

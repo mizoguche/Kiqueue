@@ -5,15 +5,15 @@ import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
+import dev.mizoguche.kiqueue.domain.Podcast
 import dev.mizoguche.kiqueue.domain.PodcastFeedUrl
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PodcastListFragment.OnListFragmentInteractionListener {
     val podcastListViewModel: PodcastListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +39,9 @@ class MainActivity : AppCompatActivity() {
                 .create()
             dialog.show()
         }
+    }
 
-        Log.d(this::class.java.canonicalName, "start getAllPodcasts")
-        val podcasts = podcastListViewModel.getAllPodcasts()
-            podcasts.observe(this@MainActivity) {
-            it.forEach { Log.d(this::class.java.canonicalName, "podcasts: $it") }
-        }
-        podcasts.value?.forEach  { Log.d(this::class.java.canonicalName, "podcasts: $it") }
+    override fun onListFragmentInteraction(item: Podcast?) {
+        Log.d(this::class.java.canonicalName, "clicked item: ${item?.title}")
     }
 }
