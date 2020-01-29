@@ -6,17 +6,20 @@ import androidx.room.PrimaryKey
 import dev.mizoguche.kiqueue.domain.Podcast
 import dev.mizoguche.kiqueue.domain.PodcastDescription
 import dev.mizoguche.kiqueue.domain.PodcastFeedUrl
+import dev.mizoguche.kiqueue.domain.PodcastId
 import dev.mizoguche.kiqueue.domain.PodcastImageUrl
 import dev.mizoguche.kiqueue.domain.PodcastTitle
 
 @Entity(tableName = "podcast")
 data class PodcastTable(
-    @PrimaryKey @ColumnInfo(name = "feed_url") val feedUrl: String,
+    @PrimaryKey val id: String,
+    @ColumnInfo(name = "feed_url") val feedUrl: String,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "image_url") val imageUrl: String
 ) {
     fun toPodcast(): Podcast = Podcast(
+        id = PodcastId(this.id),
         feedUrl = PodcastFeedUrl(this.feedUrl),
         title = PodcastTitle(this.title),
         description = PodcastDescription(this.description),
@@ -25,6 +28,7 @@ data class PodcastTable(
 }
 
 fun Podcast.toPodcastTable(): PodcastTable = PodcastTable(
+    id = this.id.value,
     feedUrl = this.feedUrl.value,
     title = this.title.value,
     imageUrl = this.imageUrl.value,

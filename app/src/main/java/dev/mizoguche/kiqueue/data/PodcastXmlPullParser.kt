@@ -3,6 +3,7 @@ package dev.mizoguche.kiqueue.data
 import dev.mizoguche.kiqueue.domain.Podcast
 import dev.mizoguche.kiqueue.domain.PodcastDescription
 import dev.mizoguche.kiqueue.domain.PodcastFeedUrl
+import dev.mizoguche.kiqueue.domain.PodcastId
 import dev.mizoguche.kiqueue.domain.PodcastImageUrl
 import dev.mizoguche.kiqueue.domain.PodcastTitle
 import org.xmlpull.v1.XmlPullParser
@@ -11,6 +12,7 @@ import org.xmlpull.v1.XmlPullParserFactory
 import java.io.IOException
 import java.io.StringReader
 import java.lang.IllegalArgumentException
+import java.net.URLEncoder
 
 class PodcastXmlPullParser : PodcastXmlParser {
     private val namespace: String? = null
@@ -42,6 +44,7 @@ class PodcastXmlPullParser : PodcastXmlParser {
         var description = ""
         var feedUrl = ""
         var imageUrl = ""
+        var id = ""
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.eventType != XmlPullParser.START_TAG) {
@@ -58,6 +61,7 @@ class PodcastXmlPullParser : PodcastXmlParser {
                     }
                     if (attr != "") {
                         feedUrl = attr
+                        id = URLEncoder.encode(feedUrl, "UTF-8")
                     }
                 }
                 else -> skip(parser)
@@ -65,6 +69,7 @@ class PodcastXmlPullParser : PodcastXmlParser {
         }
 
         return Podcast(
+            id = PodcastId(id),
             title = PodcastTitle(title),
             description = PodcastDescription(description),
             feedUrl = PodcastFeedUrl(feedUrl),

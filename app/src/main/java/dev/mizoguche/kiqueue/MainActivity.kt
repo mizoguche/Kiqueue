@@ -42,6 +42,6 @@ class MainActivity : AppCompatActivity(), PodcastListFragment.OnListFragmentInte
     }
 
     override fun onListFragmentInteraction(item: Podcast?) {
-        Log.d(this::class.java.canonicalName, "clicked item: ${item?.title}")
+        Log.d(this::class.java.canonicalName, "clicked item: $item")
     }
 }
