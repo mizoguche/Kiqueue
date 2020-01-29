@@ -57,6 +57,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
 
     implementation("io.ktor:ktor-client-android:$ktor_version")
+    implementation ("com.github.bumptech.glide:glide:4.11.0")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycle_version")
